@@ -6,12 +6,12 @@ const express = require("express");
 */
 const router = express.Router();
 
-const users = []; // idealmente, esto sería una base de datos, pero comenzaremos con algo simple
+const players = []; // idealmente, esto sería una base de datos, pero comenzaremos con algo simple
 var id = 0; // esto nos ayudará a identificar usuarios únicos
 
 // en lugar de app.get...
 router.get("/", (req, res) => {
-  return res.json(users);
+  return res.json(players);
 });
 
 router.get("/:id", (req, res) => {

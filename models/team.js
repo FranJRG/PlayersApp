@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 const PlayerSchema = new Schema({
     name: String,
-    age: Number,
-    team: String,
-    status: String
+    idPlayer: Number,
+    numPlayers: Number
 })
 
 module.exports = mongoose.model("Player", PlayerSchema);

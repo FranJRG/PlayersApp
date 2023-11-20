@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require('cors')
 const app = express();
-const atheleteRoutes = require('./routes/athelete');
+const playerRoutes = require('./routes/athelete');
 const userRoutes = require('./routes/players');
 // const dotenv = require('dotenv')
 // dotenv.config()
