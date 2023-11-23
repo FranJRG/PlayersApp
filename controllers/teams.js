@@ -20,5 +20,5 @@ const addTeams = async (req,res)=>{
         res.status(500).json({ message: error });
     }
 }
-
+f
 module.exports = {getTeams,addTeams};
