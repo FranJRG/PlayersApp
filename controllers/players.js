@@ -12,7 +12,7 @@ const getPlayers = async (req,res)=>{
 const addPlayer = async (req,res)=>{
 
     const player = req.body;
-    const newPlayer = new player(player);
+    const newPlayer = new Player(player);
     try{
         await newPlayer.save();
         res.status(201).json(newPlayer);
