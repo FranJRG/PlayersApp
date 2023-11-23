@@ -4,7 +4,7 @@ const getTeams = async (req,res)=>{
     try{
         let teams = await Team.find({});
         res.status(200).json(teams);
-    }catch(err){
+    }catch(error){
         res.status(500).json({ message: error });
     }
 }
@@ -12,11 +12,11 @@ const getTeams = async (req,res)=>{
 const addTeams = async (req,res)=>{
 
     const team = req.body;
-    const newTeam = new player(team);
+    const newTeam = new Team(team);
     try{
-        await newPlayer.save();
+        await newTeam.save();
         res.status(201).json(newTeam);
-    }catch(err){
+    }catch(error){
         res.status(500).json({ message: error });
     }
 }

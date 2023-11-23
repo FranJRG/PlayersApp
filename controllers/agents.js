@@ -4,21 +4,21 @@ const getAgents = async (req,res)=>{
     try{
         let agents = await Agent.find({});
         res.status(200).json(agents);
-    }catch(err){
+    }catch(error){
         res.status(500).json({ message: error });
     }
 }
 
-const addAgents = async (req,res)=>{
+const addAgent = async (req,res)=>{
 
     const agent = req.body;
-    const newAgent = new player(agent);
+    const newAgent = new Agent(agent);
     try{
-        await newPlayer.save();
+        await newAgent.save();
         res.status(201).json(newAgent);
-    }catch(err){
+    }catch(error){
         res.status(500).json({ message: error });
     }
 }
 
-module.exports = {getAgents,addAgents};
+module.exports = {getAgents,addAgent};
