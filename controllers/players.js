@@ -21,4 +21,19 @@ const addPlayer = async (req,res)=>{
     }
 }
 
-module.exports = {getPlayers,addPlayer}
+const updatePlayer = async (req,res)=>{
+    const playerId = req.params.id;
+    const update = req.body;
+    try{
+        const player = await Player.findByIdAndUpdate(playerId, update, {new:true});
+        if(!player){
+            res.status(400).json({message: error});
+        }else{
+            res.status(200).json(player)
+        }
+    }catch(error){
+        res.status(500).json({ message: error });
+    }
+}
+
+module.exports = {getPlayers,addPlayer,updatePlayer}

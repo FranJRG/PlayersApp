@@ -21,4 +21,19 @@ const addAgent = async (req,res)=>{
     }
 }
 
-module.exports = {getAgents,addAgent};
+const updateAgent = async (req,res)=>{
+    const agentId = req.params.id;
+    const update = req.body;
+    try{
+        const agent = await Agent.findByIdAndUpdate(agentId, update, {new:true});
+        if(!agent){
+            res.status(400).json({message: error});
+        }else{
+            res.status(200).json(agent)
+        }
+    }catch(error){
+        res.status(500).json({ message: error });
+    }
+}
+
+module.exports = {getAgents,addAgent,updateAgent};
