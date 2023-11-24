@@ -22,18 +22,42 @@ const addPlayer = async (req,res)=>{
 }
 
 const updatePlayer = async (req,res)=>{
-    const playerId = req.params.id;
-    const update = req.body;
     try{
-        const player = await Player.findByIdAndUpdate(playerId, update, {new:true});
+        const player = await Player.findByIdAndUpdate({_id : req.params.id}, req.body );
         if(!player){
-            res.status(400).json({message: error});
+            res.status(400).json({message: 'Player not find'});
         }else{
-            res.status(200).json(player)
+            res.status(200).json({message:"Update complete"});
         }
     }catch(error){
         res.status(500).json({ message: error });
     }
 }
 
-module.exports = {getPlayers,addPlayer,updatePlayer}
+const getPlayer = async (req,res)=>{
+    try{
+        const player = await Team.findByIdAndUpdate({_id : req.params.id}, req.body );
+        if(!player){
+            res.status(400).json({message : "This player don´t exist"});
+        }else{
+            res.status(200).json({player});
+        }
+    }catch(error){
+        res.status(500).json({ message: error });
+    }
+}
+
+const deletePlayer = async (req,res)=>{
+    try{
+        const player = await Team.findByIdAndUpdate({_id : req.params.id}, req.body );
+        if(!player){
+            res.status(400).json({message : "This player don´t exist"});
+        }else{
+            res.status(200).json({message : "Delete success"});
+        }
+    }catch(error){
+        res.status(500).json({ message: error });
+    }
+}
+
+module.exports = {getPlayers,addPlayer,updatePlayer,getPlayer,deletePlayer}

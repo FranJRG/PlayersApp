@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {check} = require('express-validator');
-const { getTeams, addTeams, updateTeam} = require('../controllers/teams')
+const { getTeams, addTeams, updateTeam, getTeam, deleteTeam} = require('../controllers/teams')
 const {validateFields} = require("../middlewares/validate-fields");
 
 router 
@@ -20,6 +20,8 @@ router
 
 router
 .route('/:id')
-.put(updateTeam);
+.get(getTeam)
+.put(updateTeam)
+.delete(deleteTeam)
 
 module.exports = router;

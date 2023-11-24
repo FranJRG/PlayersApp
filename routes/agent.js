@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {check} = require('express-validator');
-const { getAgents, addAgent} = require('../controllers/agents')
+const { getAgents, addAgent, updateAgent, getAgent} = require('../controllers/agents')
 const {validateFields} = require("../middlewares/validate-fields");
 
 router 
@@ -14,5 +14,10 @@ router
     check('idPlayer', 'idPlayer must be a number').isNumeric(),
     validateFields
 ],addAgent)
+
+router
+.route('/:id')
+.get(getAgent)
+.put(updateAgent)
 
 module.exports = router;

@@ -22,18 +22,42 @@ const addAgent = async (req,res)=>{
 }
 
 const updateAgent = async (req,res)=>{
-    const agentId = req.params.id;
-    const update = req.body;
     try{
-        const agent = await Agent.findByIdAndUpdate(agentId, update, {new:true});
+        const agent = await Agent.findByIdAndUpdate({_id : req.params.id}, req.body );
         if(!agent){
-            res.status(400).json({message: error});
+            res.status(400).json({message: 'Agent not find'});
         }else{
-            res.status(200).json(agent)
+            res.status(200).json({message:"Update complete"});
         }
     }catch(error){
         res.status(500).json({ message: error });
     }
 }
 
-module.exports = {getAgents,addAgent,updateAgent};
+const deleteAgent = async (req,res)=>{
+    try{
+        const agent = await Agent.findByIdAndUpdate({_id : req.params.id}, req.body );
+        if(!agent){
+            res.status(400).json({message: 'Agent not find'});
+        }else{
+            res.status(200).json({message:"Delete success"});
+        }
+    }catch(error){
+        res.status(500).json({ message: error });
+    }
+}
+
+const getAgent = async (req,res)=>{
+    try{
+        const agent = await Agent.findByIdAndUpdate({_id : req.params.id}, req.body );
+        if(!agent){
+            res.status(400).json({message : "This agent don´t exist"});
+        }else{
+            res.status(200).json({agent});
+        }
+    }catch(error){
+        res.status(500).json({ message: error });
+    }
+}
+
+module.exports = {getAgents,addAgent,updateAgent,getAgent,deleteAgent};

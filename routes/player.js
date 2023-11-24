@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {check} = require('express-validator');
-const { getPlayers, addPlayer} = require('../controllers/players')
+const { getPlayers, addPlayer, getPlayer, updatePlayer} = require('../controllers/players')
 const {validateFields} = require("../middlewares/validate-fields");
 const {nameExist} = require('../helpers/db-validators');
 
@@ -15,5 +15,10 @@ router
     check('name').custom(nameExist),
     validateFields
 ],addPlayer)
+
+router
+.route('/:id')
+.get(getPlayer)
+.put(updatePlayer)
 
 module.exports = router;
