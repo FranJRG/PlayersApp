@@ -37,9 +37,8 @@ const updateTeam = async (req,res)=>{
 
 const deleteTeam = async (req,res)=>{
     try{
-        const team = await Team.findByIdAndUpdate({_id : req.params.id}, req.body );
+        const team = await Team.findByIdAndDelete({_id : req.params.id}, req.body );
         if(!team){
-            await Team.deleteOne(team);
             res.status(400).json({message: 'Team not find'});
         }else{
             res.status(200).json({message:"Delete success"});
