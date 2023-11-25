@@ -14,6 +14,7 @@ const addTeams = async (req,res)=>{
     const team = req.body;
     const newTeam = new Team(team);
     try{
+        console.log(res)
         await newTeam.save();
         res.status(201).json(newTeam);
     }catch(error){

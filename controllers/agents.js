@@ -10,7 +10,6 @@ const getAgents = async (req,res)=>{
 }
 
 const addAgent = async (req,res)=>{
-
     const agent = req.body;
     const newAgent = new Agent(agent);
     try{

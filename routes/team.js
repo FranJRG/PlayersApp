@@ -8,7 +8,7 @@ router
 .route('/')
 .get(getTeams)
 .post([
-    check('idPlayer','Id is numeric').isNumeric(),
+    // check('idPlayer','Id is numeric').isNumeric(),
     check('numPlayers','The number of players must be between 11 and 25').isInt({min:11, max:25}),
     check('numPlayers', 'NumPlayers is required').not().isEmpty(),
     check('numPlayers','The number of players is numeric').isNumeric(),
