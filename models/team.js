@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TeamSchema = new Schema({
     name: String,
-    idPlayer: Number,
+    idTeam: Number,
     numPlayers: Number,
     league: String
 })
