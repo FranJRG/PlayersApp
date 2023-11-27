@@ -35,7 +35,7 @@ const updateAgent = async (req,res)=>{
 
 const deleteAgent = async (req,res)=>{
     try{
-        const agent = await Agent.findByIdAndDelete({_id : req.params.id}, req.body );
+        const agent = await Agent.findByIdAndDelete({_id : req.params.id});
         if(!agent){
             res.status(400).json({message: 'Agent not find'});
         }else{
@@ -48,7 +48,7 @@ const deleteAgent = async (req,res)=>{
 
 const getAgent = async (req,res)=>{
     try{
-        const agent = await Agent.findByIdAndUpdate({_id : req.params.id}, req.body );
+        const agent = await Agent.findById({_id : req.params.id});
         if(!agent){
             res.status(400).json({message : "This agent don´t exist"});
         }else{

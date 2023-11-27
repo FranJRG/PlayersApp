@@ -20,8 +20,17 @@ router
 
 router
 .route('/:id')
-.get(getTeam)
-.put(updateTeam)
-.delete(deleteTeam)
+.get([
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],getTeam)
+.put([
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],updateTeam)
+.delete([
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],deleteTeam)
 
 module.exports = router;

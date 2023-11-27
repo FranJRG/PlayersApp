@@ -17,7 +17,13 @@ router
 
 router
 .route('/:id')
-.get(getAgent)
-.put(updateAgent)
+.get([
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],getAgent)
+.put([
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],updateAgent)
 
 module.exports = router;

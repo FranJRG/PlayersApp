@@ -36,7 +36,7 @@ const updatePlayer = async (req,res)=>{
 
 const getPlayer = async (req,res)=>{
     try{
-        const player = await Team.findByIdAndDelete({_id : req.params.id}, req.body );
+        const player = await Player.findById({_id : req.params.id});
         if(!player){
             res.status(400).json({message : "This player don´t exist"});
         }else{
@@ -49,7 +49,7 @@ const getPlayer = async (req,res)=>{
 
 const deletePlayer = async (req,res)=>{
     try{
-        const player = await Team.findByIdAndUpdate({_id : req.params.id}, req.body );
+        const player = await Player.findByIdAndDelete({_id : req.params.id});
         if(!player){
             res.status(400).json({message : "This player don´t exist"});
         }else{

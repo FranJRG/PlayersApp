@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const {check} = require('express-validator');
-const { getPlayers, addPlayer, getPlayer, updatePlayer} = require('../controllers/players')
+const { getPlayers, addPlayer, getPlayer, updatePlayer, deletePlayer} = require('../controllers/players')
 const {validateFields} = require("../middlewares/validate-fields");
-const {nameExist} = require('../helpers/db-validators');
+const {nameExist, nameExistUpdate} = require('../helpers/db-validators');
 
 router 
 .route('/')
@@ -18,7 +18,18 @@ router
 
 router
 .route('/:id')
-.get(getPlayer)
-.put(updatePlayer)
+.get([
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],getPlayer)
+.put([
+    check('name').custom(nameExistUpdate),
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],updatePlayer)
+.delete([
+    check("id","Id not valid").isMongoId(),
+    validateFields
+],deletePlayer)
 
 module.exports = router;
