@@ -4,6 +4,7 @@ const app = express();
 const playerRoutes = require('./routes/player');
 const teamRoutes = require('./routes/team');
 const agentRoutes = require('./routes/agent');
+const userRoutes = require('./routes/user');
 //const dotenv = require('dotenv')
 //dotenv.config()
 require('dotenv').config();
@@ -28,6 +29,7 @@ app.use(express.json())
 app.use('/teams', teamRoutes)
 app.use('/players', playerRoutes)
 app.use('/agents', agentRoutes)
+app.use('/users', userRoutes);
 
 
 // Iniciar el servidor en el puerto 3000
