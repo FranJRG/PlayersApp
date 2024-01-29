@@ -40,7 +40,7 @@ const getPlayer = async (req,res)=>{
         if(!player){
             res.status(400).json({message : "This player don´t exist"});
         }else{
-            res.status(200).json({player});
+            res.status(200).json(player);
         }
     }catch(error){
         res.status(500).json({ message: error });
