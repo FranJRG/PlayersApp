@@ -8,15 +8,12 @@ const { validateFields } = require("../middlewares/validate-fields");
 router
 .route('/')
 .get(getUsers)
-
-router
-.route('/users')
 .post([
     check('email','Email is required').not().isEmpty(),
     check('login','Login is required').not().isEmpty(),
     check('name','Name is required').not().isEmpty(),
     check('role','Role is required').not().isEmpty(),
-    check('password',"Password weak").matches("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8}$/"),
+    //check('password',"Password weak").matches("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8}$/"),
     check('password','Password is required').not().isEmpty(),
     check('email').isEmail(),
     check('email').custom(emailExist),
