@@ -22,7 +22,7 @@ router
 ],addUser)
 
 router
-.route('users/:id')
+.route('/:id')
 .get([
     check('id','Id not valid').isMongoId(),
     validateFields

@@ -62,7 +62,7 @@ const deleteUser = async (req,res)=>{
 
 const deleteActive = async (req,res)=> {
     try{
-        const user = await User.findByIdAndUpdate({_id : req.params.id}, user.active=false );
+        const user = await User.findByIdAndUpdate(req.params.id, { active: false });
         if(!user){
             res.status(400).json({message : "This user don´t exist"});
         }else{
