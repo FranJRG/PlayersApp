@@ -60,4 +60,17 @@ const deleteUser = async (req,res)=>{
     }
 }
 
-module.exports = {getUsers,addUser,updateUser,getUser,deleteUser}
+const deleteActive = async (req,res)=> {
+    try{
+        const user = await User.findByIdAndUpdate({_id : req.params.id}, user.active=false );
+        if(!user){
+            res.status(400).json({message : "This user don´t exist"});
+        }else{
+            res.status(200).json({message : "User desactivated"});
+        }
+    }catch(error){
+        res.status(500).json({ message: error });
+    }
+}
+
+module.exports = {getUsers,addUser,updateUser,getUser,deleteUser, deleteActive}
