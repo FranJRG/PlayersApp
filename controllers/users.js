@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const bcryptjs = require('bcryptjs');
 
 const getUsers = async (req,res)=>{
     try{
@@ -12,7 +13,10 @@ const getUsers = async (req,res)=>{
 const addUser = async (req,res)=>{
 
     const user = req.body;
-    const newUser = new User(user);
+    const password = req.body.password;
+    const salt = bcryptjs.genSaltSync(10);
+    const encryptedPassword = bcryptjs.hashSync(password, salt);
+    const newUser = new User({...user,active:true, password:encryptedPassword});
     try{
         await newUser.save();
         res.status(201).json(newUser);
@@ -20,6 +24,27 @@ const addUser = async (req,res)=>{
         res.status(500).json({ message: error });
     }
 }
+
+const loginUser = async (req, res) => {
+    const { login, password } = req.body;
+
+    try {
+        const user = await User.findOne({ login });
+        if (user) {
+            const isPasswordValid = bcryptjs.compareSync(password, user.password);
+            if (isPasswordValid) {
+                res.status(200).json({ user });
+            } else {
+                res.status(401).json({ message: "Invalid password" });
+            }
+        } else {
+            res.status(404).json({ message: "User not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 
 const updateUser = async (req,res)=>{
     try{
@@ -73,4 +98,4 @@ const deleteActive = async (req,res)=> {
     }
 }
 
-module.exports = {getUsers,addUser,updateUser,getUser,deleteUser, deleteActive}
+module.exports = {getUsers,addUser,updateUser,getUser,deleteUser, deleteActive, loginUser}
