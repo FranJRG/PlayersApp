@@ -4,6 +4,8 @@ const {check} = require('express-validator');
 const { getUsers, updateUser, getUser, addUser, deleteActive, loginUser } = require("../controllers/users");
 const { emailExist, loginExist, loginUserExistUpdate, emailExistUpdate } = require("../helpers/db-validators");
 const { validateFields } = require("../middlewares/validate-fields");
+const { validateJWT } = require("../middlewares/validate-jwt");
+const { isAdmin } = require("../middlewares/validate-role");
 
 router
 .route('/')
@@ -34,8 +36,8 @@ router
     validateFields
 ],updateUser)
 .delete([
-    check('id',"Id not valid").isMongoId(),
-    validateFields
+    validateJWT,
+    isAdmin
 ],deleteActive)
 
 module.exports=router;

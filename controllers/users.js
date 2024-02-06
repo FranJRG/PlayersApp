@@ -25,27 +25,6 @@ const addUser = async (req,res)=>{
     }
 }
 
-const loginUser = async (req, res) => {
-    const { login, password } = req.body;
-
-    try {
-        const user = await User.findOne({ login });
-        if (user) {
-            const isPasswordValid = bcryptjs.compareSync(password, user.password);
-            if (isPasswordValid) {
-                res.status(200).json({ user });
-            } else {
-                res.status(401).json({ message: "Invalid password" });
-            }
-        } else {
-            res.status(404).json({ message: "User not found" });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-
 const updateUser = async (req,res)=>{
     try{
         const user = await User.findByIdAndUpdate({_id : req.params.id}, req.body );
@@ -98,4 +77,4 @@ const deleteActive = async (req,res)=> {
     }
 }
 
-module.exports = {getUsers,addUser,updateUser,getUser,deleteUser, deleteActive, loginUser}
+module.exports = {getUsers,addUser,updateUser,getUser,deleteUser, deleteActive}
