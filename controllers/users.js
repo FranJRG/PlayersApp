@@ -16,7 +16,7 @@ const addUser = async (req,res)=>{
     const password = req.body.password;
     const salt = bcryptjs.genSaltSync(10);
     const encryptedPassword = bcryptjs.hashSync(password, salt);
-    const newUser = new User({...user,active:true, password:encryptedPassword});
+    const newUser = new User({...user,active:true, password:encryptedPassword, role:"USER_ROLE"});
     try{
         await newUser.save();
         res.status(201).json(newUser);

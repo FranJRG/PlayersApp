@@ -3,6 +3,7 @@ const router = express.Router();
 const {check} = require('express-validator');
 const { getUsers, updateUser, getUser, addUser, deleteActive, loginUser } = require("../controllers/users");
 const { emailExist, loginExist, loginUserExistUpdate, emailExistUpdate } = require("../helpers/db-validators");
+const {hasRole} = require("../middlewares/validate-roles");
 const { validateFields } = require("../middlewares/validate-fields");
 const { validateJWT } = require("../middlewares/validate-jwt");
 const { isAdmin } = require("../middlewares/validate-role");
@@ -26,6 +27,7 @@ router
 router
 .route('/:id')
 .get([
+    hasRole("USER_ADMIN","USER_ROLE"),
     check('id','Id not valid').isMongoId(),
     validateFields
 ],getUser)
