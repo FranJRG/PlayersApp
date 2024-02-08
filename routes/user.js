@@ -27,7 +27,8 @@ router
 router
 .route('/:id')
 .get([
-    hasRole("USER_ADMIN","USER_ROLE"),
+    validateJWT,
+    hasRole("ADMIN_ROLE","USER_ROLE"),
     check('id','Id not valid').isMongoId(),
     validateFields
 ],getUser)
