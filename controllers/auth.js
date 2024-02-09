@@ -3,10 +3,10 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const loginUser = async (req, res) => {
-    const { login, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ login });
+        const user = await User.findOne({ email });
         if (user) {
             const isPasswordValid = bcryptjs.compareSync(password, user.password);
             if (isPasswordValid) {
